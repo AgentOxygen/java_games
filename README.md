@@ -18,3 +18,9 @@ This project will evolve, creating multiple games that build off of each other. 
     *	Player movement
 5.	Speed runners copy
 6.	The game…
+
+## Dependencies
+All assets and external dependencies will be accounted for here for posterity.
+
+This project will use libGDX as the game engine. https://libgdx.com/
+
