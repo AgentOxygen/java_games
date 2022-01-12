@@ -20,10 +20,9 @@ public class TicTacToe extends ApplicationAdapter implements InputProcessor {
 	private static final int empty_code = 0, circle_code = 1, x_code = 2;
 	private static final int h_win_code = 1, v_win_code = 2, d104_win_code = 3, d82_win_code = 4;
 	private static final Color circle_color = Color.RED, x_color = Color.BLUE, win_color = Color.NAVY;
-	private static final float marker_size = 150;
 
-	private static final int board_width = 3;
-	private static final int board_height = 3;
+	private static final int board_width = 7;
+	private static final int board_height = 7;
 	private static final int win_condition = 3;
 	private int[][] board = new int[board_width][board_height];
 
@@ -80,22 +79,23 @@ public class TicTacToe extends ApplicationAdapter implements InputProcessor {
 		sRender.setColor(win_color);
 		float cell_width = viewport_width/board_width;
 		float cell_height = viewport_height/board_height;
+		float line_thick = 5;
 
 		for (int i = 0; i < board_width; i++){
 			for (int j = 0; j < board_height; j++){
-				sRender.begin(ShapeRenderer.ShapeType.Line);
+				sRender.begin(ShapeRenderer.ShapeType.Filled);
 				switch(win_board[i][j]){
 					case v_win_code:
-						sRender.line(i*cell_width + cell_width/2, j*cell_height, i*cell_width + cell_width/2, (j+1)*cell_height);
+						sRender.rectLine(i*cell_width + cell_width/2, j*cell_height, i*cell_width + cell_width/2, (j+1)*cell_height, line_thick);
 						break;
 					case h_win_code:
-						sRender.line(i*cell_width, j*cell_height + cell_height/2, (i+1)*cell_width, j*cell_height + cell_height/2);
+						sRender.rectLine(i*cell_width, j*cell_height + cell_height/2, (i+1)*cell_width, j*cell_height + cell_height/2, line_thick);
 						break;
 					case d104_win_code:
-						sRender.line((i+1)*cell_width, j*cell_height, i*cell_width, (j+1)*cell_height);
+						sRender.rectLine((i+1)*cell_width, j*cell_height, i*cell_width, (j+1)*cell_height, line_thick);
 						break;
 					case d82_win_code:
-						sRender.line(i*cell_width, j*cell_height, (i+1)*cell_width, (j+1)*cell_height);
+						sRender.rectLine(i*cell_width, j*cell_height, (i+1)*cell_width, (j+1)*cell_height, line_thick);
 						break;
 					default:
 						break;
@@ -234,12 +234,14 @@ public class TicTacToe extends ApplicationAdapter implements InputProcessor {
 		/*
 		Draws the X's and O's on the board
 		 */
+		float radius = viewport_width / (board_width*2.5f);
 		for (int i = 0; i < board_width; i++){
 			for (int j = 0; j < board_height; j++){
 				if (board[i][j] == circle_code){
 					sRender.begin(ShapeRenderer.ShapeType.Line);
 					sRender.setColor(circle_color);
-					sRender.circle(i*viewport_width/board_width + (viewport_width/(board_width*2)), j*viewport_height/board_height + (viewport_height/(board_height*2)), marker_size/2);
+					sRender.circle(i*viewport_width/board_width + (viewport_width/(board_width*2)),
+							j*viewport_height/board_height + (viewport_height/(board_height*2)), radius);
 					sRender.end();
 				}else if (board[i][j] == x_code){
 					sRender.begin(ShapeRenderer.ShapeType.Line);
@@ -259,10 +261,12 @@ public class TicTacToe extends ApplicationAdapter implements InputProcessor {
 		float line_thick = 3;
 		sRender.begin(ShapeRenderer.ShapeType.Filled);
 		sRender.setColor(Color.BLACK);
-		sRender.rect(0, viewport_height/board_height - line_thick, viewport_width, line_thick);
-		sRender.rect(0, (viewport_height/board_height)*2 - line_thick, viewport_width, line_thick);
-		sRender.rect(viewport_width/board_width - line_thick, 0, line_thick, viewport_height);
-		sRender.rect((viewport_height/board_height)*2 - line_thick, 0, line_thick, viewport_height);
+		for (int i = 1; i < board_width; i++){
+			sRender.rect((viewport_width/board_width)*i - line_thick, 0, line_thick, viewport_height);
+		}
+		for (int i = 1; i < board_height; i++){
+			sRender.rect(0, (viewport_height/board_height)*i - line_thick, viewport_width, line_thick);
+		}
 		sRender.end();
 	}
 
