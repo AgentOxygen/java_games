@@ -6,18 +6,20 @@ This project will evolve, creating multiple games that build off of each other. 
 3. To hopefully stay interested in this project longer
 
 ## Planned Progresison
-1.	Tick-tack-toe
-    *	Local coop
-2.	Snake
-3.  Tick-tack-toe 2.0
-    *	Multiplayer
-    *	AI
-4.	Physics Box
-    *	Gravity
-    *	Collisions
-    *	Player movement
-5.	Speed runners copy
-6.	The game…
+
+- [x]	Tick-tack-toe
+    - [x]	Local coop
+- [ ] Snake
+    - [ ]	Local coop
+- [ ] Tick-tack-toe 2.0
+    - [ ]   Multiplayer
+    - [ ]	AI
+- [ ]	Physics Box
+    - [ ]	Gravity
+    - [ ]	Collisions
+    - [ ]	Player movement
+- [ ]	Speed runners copy
+- [ ] The game…
 
 ## Dependencies
 All assets and external dependencies will be accounted for here for posterity.
