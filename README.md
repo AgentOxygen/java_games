@@ -9,9 +9,8 @@ This project will evolve, creating multiple games that build off of each other. 
 
 - [x]	Tick-tack-toe
     - [x]	Local coop
-- [ ] Snake
-    - [ ]	Local coop
-- [ ] Tick-tack-toe 2.0
+- [X] Snake
+- [ ] Snake 2.0
     - [ ]   Multiplayer
     - [ ]	AI
 - [ ]	Physics Box
