@@ -26,3 +26,4 @@ All assets and external dependencies will be accounted for here for posterity.
 This project will use libGDX as the game engine. https://libgdx.com/
 
 Sci-fi Platform Tiles https://opengameart.org/content/sci-fi-platform-tiles
+Medieval Warrior Pack https://luizmelo.itch.io/medieval-warrior-pack-2
