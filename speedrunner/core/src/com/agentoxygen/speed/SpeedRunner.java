@@ -1,31 +1,31 @@
 package com.agentoxygen.speed;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-public class SpeedRunner extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
+
+public class SpeedRunner extends Game {
+
+	public static Skin skin;
+
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+		this.setScreen(new RunScreen(this));
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		super.render();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
+		skin.dispose();
+	}
+
+	public static void print(Object out){
+		System.out.println(out.toString());
 	}
 }

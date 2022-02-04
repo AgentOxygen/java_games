@@ -21,8 +21,8 @@ public class TicTacToe extends ApplicationAdapter implements InputProcessor {
 	private static final int h_win_code = 1, v_win_code = 2, d104_win_code = 3, d82_win_code = 4;
 	private static final Color circle_color = Color.RED, x_color = Color.BLUE, win_color = Color.NAVY;
 
-	private static final int board_width = 7;
-	private static final int board_height = 7;
+	private static final int board_width = 3;
+	private static final int board_height = 3;
 	private static final int win_condition = 3;
 	private int[][] board = new int[board_width][board_height];
 
