@@ -3,30 +3,31 @@ package com.oxygen.bunker;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
+@Deprecated
 public class LevelBody {
     private BodyDef bodyDef;
     private FixtureDef fixDef;
-    private Object data;
+    private String data;
 
-    private boolean hasData = false;
+    private boolean hasDataString = false;
 
     public LevelBody(BodyDef setBodyDef, FixtureDef setFixDef){
         bodyDef = setBodyDef;
         fixDef = setFixDef;
     }
 
-    public LevelBody(BodyDef setBodyDef, FixtureDef setFixDef, Object setData){
+    public LevelBody(BodyDef setBodyDef, FixtureDef setFixDef, String setData){
         bodyDef = setBodyDef;
         fixDef = setFixDef;
         data = setData;
-        hasData = true;
+        hasDataString = true;
     }
 
-    public boolean hasData(){
-        return hasData;
+    public boolean hasDataString(){
+        return hasDataString;
     }
 
-    public Object getData(){
+    public String getDataString(){
         return data;
     }
 

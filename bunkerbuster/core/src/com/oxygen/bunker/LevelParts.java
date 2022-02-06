@@ -1,18 +1,27 @@
 package com.oxygen.bunker;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class LevelParts {
-    public static LevelBody BODY(){
-        BodyDef bodyDef = new BodyDef();
-        FixtureDef fixDef = new FixtureDef();
-        PolygonShape polyShape = new PolygonShape();
-        fixDef.shape = polyShape;
-        return new LevelBody(bodyDef, fixDef);
+
+    public static Vector2 getPartTextureSize(String id){
+        switch (id){
+            default:
+                return new Vector2(1, 1);
+        }
     }
 
-    public static Body RECT(World world, float x, float y, float w, float h){
+    public static Texture getPartTexture(String id){
+        switch (id){
+            default:
+                return new Texture(Gdx.files.internal("debug.png"));
+        }
+    }
+
+    public static Body RECT(World world, float x, float y, float w, float h, String id){
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(new Vector2(x, y));
 
@@ -23,6 +32,7 @@ public class LevelParts {
         fixDef.shape = polyShape;
         Body body = world.createBody(bodyDef);
         body.createFixture(fixDef);
+        body.setUserData(id);
 
         return body;
     }
@@ -34,11 +44,13 @@ public class LevelParts {
 
         FixtureDef fixDef = new FixtureDef();
         PolygonShape polyShape = new PolygonShape();
-        polyShape.setAsBox(0.2f, 1.3f);
+        polyShape.setAsBox(1f, 1f);
+        fixDef.restitution = 0.5f;
 
         fixDef.shape = polyShape;
         Body body = world.createBody(bodyDef);
         body.createFixture(fixDef);
+        body.setUserData("player");
 
         return body;
     }

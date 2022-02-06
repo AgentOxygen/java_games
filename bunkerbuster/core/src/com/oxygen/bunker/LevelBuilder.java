@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.Random;
+import java.util.logging.Level;
 
 public class LevelBuilder {
     private World world;
@@ -32,7 +33,8 @@ public class LevelBuilder {
 
     private void buildDebug(){
         // Builds the debugging level
-        Body floor = LevelParts.RECT(world, 0, 0, 100, 2);
+        Body floor = LevelParts.RECT(world, 0, 0, 100, 2, "floor");
+        Body obstacle = LevelParts.RECT(world, 10, 3f, 1, 1, "floor");
 //        world.createBody(floor.getBodyDef()).createFixture(floor.getFixDef());
 //        floor.getFixDef().shape.dispose();
     }
