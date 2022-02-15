@@ -1,50 +1,34 @@
 package com.oxygen.bunker;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 
 public class Player {
-    // Contains all data pertaining to the player
-    private World world;
-    private Body playerBody;
+    public static final float PLAYER_WIDTH = 1f;
+    public static final float PLAYER_HEIGHT = 1f;
+    public static final String PLAYER_ID = "PLAYER";
+    public Body body;
+    private PolygonShape polyShape;
 
-    // Player settings
-    public static final float PLAYER_ACCEL = 1.0f;
-    public static final float PLAYER_MAX_BASE_SPEED = 1.0f;
-    public static final float PLAYER_JUMP_FORCE = 10f;
+    public Player(World world, Vector2 initPos){
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.position.set(initPos);
 
-    // Movement directions
-    public static final int LEFT = 2;
-    public static final int RIGHT = 1;
-    public static final int IDLE = 0;
+        FixtureDef fixDef = new FixtureDef();
+        polyShape = new PolygonShape();
+        polyShape.setAsBox(PLAYER_WIDTH, PLAYER_HEIGHT);
 
-    public Player(World world, float initX, float initY){
-        this.world = world;
-        playerBody = LevelParts.PLAYER(world, initX, initY);
-        playerBody.setBullet(true);
+        fixDef.shape = polyShape;
+        body = world.createBody(bodyDef);
+        body.createFixture(fixDef);
+        body.setUserData(PLAYER_ID);
     }
 
-    public void jumpPlayer(){
-        playerBody.applyLinearImpulse(new Vector2(0, PLAYER_JUMP_FORCE), playerBody.getPosition(), true);
+    public PolygonShape getShape(){
+        return polyShape;
     }
 
-    public void movePlayer(int direction){
-        switch (direction) {
-            case LEFT:
-                playerBody.setLinearVelocity(playerBody.getLinearVelocity().x - PLAYER_MAX_BASE_SPEED, playerBody.getLinearVelocity().y);
-                break;
-            case RIGHT:
-                playerBody.setLinearVelocity(playerBody.getLinearVelocity().x + PLAYER_MAX_BASE_SPEED, playerBody.getLinearVelocity().y);
-                break;
-            default:
-                playerBody.setLinearVelocity(0, 0);
-                break;
-        }
-    }
-
-    public Vector2 getPos(){
-        return playerBody.getPosition();
+    public void dispose(){
+        polyShape.dispose();
     }
 }

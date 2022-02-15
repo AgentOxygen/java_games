@@ -27,3 +27,19 @@ This project will use libGDX as the game engine. https://libgdx.com/
 
 Sci-fi Platform Tiles https://opengameart.org/content/sci-fi-platform-tiles
 Medieval Warrior Pack https://luizmelo.itch.io/medieval-warrior-pack-2
+
+# Dust
+ - Minimal use of textures and focus on using geometries with shaders
+ - Brown canvas monochrome style
+## Goal
+Collect space dust scattered throughout space and locked in asteroids
+## Obstacles
+- [ ] Crashing into moving asteroids
+- [ ] Falling into a black hole
+## Player
+- [ ] Ship with forward thrust and mouse to change direction
+- [ ] Fires missles
+- [ ] Collects dust by flying through it
+## Progression
+- [ ] Delivering dust to space station in exchange for credits
+- [ ] Credits upgrade player ship stats

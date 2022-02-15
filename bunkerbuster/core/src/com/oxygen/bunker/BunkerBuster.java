@@ -8,7 +8,7 @@ public class BunkerBuster extends Game {
 
 	@Override
 	public void create() {
-		this.setScreen(new Raid(this));
+		this.setScreen(new Raid());
 	}
 
 	public static void print(Object out){
