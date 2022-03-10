@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class DustGame extends Game {
-	public static final int SCREEN_WIDTH = 1000;
-	public static final int SCREEN_HEIGHT = 800;
+	public static final int SCREEN_WIDTH = 1600;
+	public static final int SCREEN_HEIGHT = 900;
 
 	@Override
 	public void create() {

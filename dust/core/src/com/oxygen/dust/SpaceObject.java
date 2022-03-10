@@ -1,35 +1,67 @@
 package com.oxygen.dust;
 
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.*;
+
+import java.util.Random;
+import java.util.UUID;
 
 public abstract class SpaceObject {
     private Body body;
+    private Sprite sprite;
     public Settings settings = new Settings();
+    public Random random;
+    // When true, the game will eventually delete the body from the world and remove this object when Space.checkAndDestroySpaceObjs() is called.
+    public int destroy = -1;
+    private final UUID uuid = UUID.randomUUID();
 
     public SpaceObject(World world, float spawnX, float spawnY){
+        this.sprite = getSprite();
         body = createBody(world, spawnX, spawnY);
+        body.setUserData(this);
+    }
+    public SpaceObject(World world, float spawnX, float spawnY, Random random){
+        this.sprite = getSprite();
+        this.random = random;
+        body = createBody(world, spawnX, spawnY);
+        body.setUserData(this);
     }
     public Body getBody(){
         return body;
     }
-    public void fullRender(SpriteBatch batch, Camera camera){
-        TextureRegion textRegion = getTextureReg(settings);
-        Vector3 bodyPos = camera.project(new Vector3(body.getPosition(), 0));
-
-        float x = (bodyPos.x - camera.viewportWidth / 2);
-        float y = (bodyPos.y - camera.viewportHeight / 2);
-        float width = textRegion.getRegionWidth()*2;
-        float height = textRegion.getRegionHeight()*2;
-
-        batch.begin();
-        batch.draw(textRegion, x - width/2, y - height/2, width/2, height/2, width, height, 1f, 1f, (float)Math.toDegrees(this.getBody().getAngle()));
-        batch.end();
+    public UUID getUUID(){
+        return uuid;
     }
+
+    // Called when rendering the object
+    public abstract Sprite getSprite();
+    // Called when creating the object (in constructor)
     public abstract Body createBody(World world, float spawnX, float spawnY);
-    public abstract TextureRegion getTextureReg(Settings settings);
+    @Deprecated
+    public static int[] scaleUp(float x, float y){
+        /**
+         *  Work in progress for scaling world to screen
+         */
+        int[] scaled = new int[4];
+        String xString = Float.toString(Math.abs(x));
+        String yString = Float.toString(Math.abs(y));
+
+        int scale = ((int) Math.pow(10, Math.max(xString.length() - xString.indexOf('.') - 1, yString.length() - yString.indexOf('.') - 1)));
+        int x1 = Math.round(scale*x);
+        int y1 = Math.round(scale*y);
+        int greatComDen = x1, divisor = y1;
+
+        while (divisor > 0) {
+            int temp = divisor;
+            divisor = greatComDen % divisor;
+            greatComDen = temp;
+        }
+        scaled[0] = x1 / greatComDen;
+        scaled[1] = y1 / greatComDen;
+        scaled[2] = greatComDen;
+        scaled[3] = scale;
+        return scaled;
+    }
+    // Called on collision with another object
+    public abstract void onCollision(Fixture self, Fixture other);
 }
